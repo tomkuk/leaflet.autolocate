@@ -1,0 +1,87 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Leaflet.Autolocate demo</title>
+
+  <!-- Leaflet CSS. -->
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+  
+  <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.4.5/leaflet.ie.css" />
+  <![endif]-->
+  
+  <style>
+    #map {
+      height: 433px;
+      width: 700px;
+      margin: 50px auto;
+    }
+    
+    .leaflet-control-autolocate {
+      padding: 5px;
+      background: rgba(0, 0, 0, 0.25);
+      moz-border-radius: 7px;
+      -webkit-border-radius: 7px;
+      border-radius: 7px;
+    }
+
+    .leaflet-control-autolocate a {
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
+      width: 19px;
+      height: 19px;
+      display: block;
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+
+    .leaflet-control-autolocate a:hover {
+      background-color: white;
+    }
+
+    /**
+     * button styles
+     */
+    .leaflet-control-autolocate-btn {
+      background-image: url(http://f.cl.ly/items/3V2F1R3u0M0K1G1E0u2R/location.png);
+      background-size: 70%;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- map container -->
+  <div id="map"></div>
+  
+  <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
+  <script src="leaflet.autolocate.js"></script>
+  <script>
+    
+    var map = new L.Map('map');
+    
+    var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'
+    });
+    var etown = new L.LatLng(53.52327, -113.53297);
+    map.setView(etown, 13).addLayer(tiles);
+
+    // create custom autolocate control
+    var autolocate = new L.Control.Autolocate({ 
+                              position: "topright", 
+                              maxZoom: 30, 
+                              button: { title: "Find my location" } 
+                          });
+    
+    map.addControl(autolocate);
+  </script>
+  
+</body>
+</html>
